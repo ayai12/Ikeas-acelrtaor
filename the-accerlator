@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+   body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+        }
+      	#eleven {
+      		background-color: #D81B60;
+          width: 600;
+          height: 50px;
+          font-size: 20px;
+          font-weight: bolder;
+        	border-color: white;
+          border-radius: 10px;
+          color: white;
+        
+      }
+      
+
+        .fullscreen-active body {
+            background-color: black;
+        }
+
+        .fullscreen-active #uselessStuff,
+        .fullscreen-active .container,
+        .fullscreen-active nav {
+            display: none;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            z-index: 2;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            align-items: center;
+        }
+
+        nav ul li {
+            margin-right: 10px;
+        }
+
+        nav ul li a {
+            padding: 12px 24px;
+            background-color: #4285f4;
+            color: #fff;
+            text-align: center;
+            border-radius: 5px;
+            text-transform: uppercase;
+            transition: 200ms all;
+            text-decoration: none;
+            font-weight: 700;
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 2;
+        }
+
+        nav ul li a:hover {
+            background-color: #34a853;
+        }
+
+        .container {
+            border-radius: 10px;
+            padding: 30px;
+            margin: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            z-index: 2;
+        }
+
+        h2 {
+            color: #4285f4;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        input[type="text"],
+        select {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        #uselessStuff {
+            text-align: center;
+            margin-top: 40px;
+            z-index: 2;
+        }
+
+        #smexy-rater {
+            background-color: #FF4081;
+            color: #fff;
+            padding: 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 24px;
+            font-weight: 700;
+            transition: 200ms all;
+            z-index: 2;
+        }
+
+        #smexy-rater:hover {
+            background-color: #D81B60;
+        }
+
+        #ratingOutput {
+            font-size: 24px;
+            margin-top: 20px;
+            color: #4285f4;
+            font-weight: 700;
+        }
+
+        #particles-js {
+            width: 100%;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            display: none;
+        }
+
+        #fullscreen-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #4285f4;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 700;
+            z-index: 2;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="particles-js"></div>
+    <nav>
+        <ul>
+            <li><a href="#">Ayaan</a></li>
+            <li><a href="#">Joe</a></li>
+            <li><a href="#">Donal</a></li>
+            <li><a href="#">Ikeas</a></li>
+        </ul>
+    </nav>
+    <div id="uselessStuff">
+        <button id="smexy-rater" onclick="rateSmexy()">smexy rater</button>
+        <p id="ratingOutput"></p>
+    </div>
+    <div class="container">
+        <h2>Form</h2>
+        <form>
+            <label for="opinion">What do you think about our smexy rater?</label>
+            <input type="text" id="opinion" name="opinion" required>
+
+            <label for="rating">Rating:</label>
+            <select id="rating" name="rating">
+                <option value="1">good</option>
+                <option value="2">very good</option>
+                <option value="3">yes yes we love you because you're a ten</option>
+            </select>
+
+          <button id="eleven" onclick="sunblitfunc()">Sumbit</button>
+        </form>
+    </div>
+    <button id="fullscreen-button" onclick="toggleFullscreen()">Toggle Fullscreen</button>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        var particlesInitialized = false;
+
+        document.addEventListener("DOMContentLoaded", function () {
+            initializeParticles();
+        });
+
+        function initializeParticles() {
+            particlesJS("particles-js", {
+                particles: {
+                    number: {
+                        value: 80,
+                        density: {
+                            enable: true,
+                            value_area: 800,
+                        },
+                    },
+                    color: {
+                        value: "#000000",
+                    },
+                    shape: {
+                        type: "circle",
+                        stroke: {
+                            width: 0,
+                            color: "#000000",
+                        },
+                        polygon: {
+                            nb_sides: 15,
+                        },
+                    },
+                    opacity: {
+                        value: 1,
+                        random: false,
+                        anim: {
+                            enable: false,
+                            speed: 1,
+                            opacity_min: 0.1,
+                            sync: false,
+                        },
+                    },
+                    size: {
+                        value: 10,
+                        random10: true,
+                        anim: {
+                            enable: false,
+                            speed: 40,
+                            size_min: 1,
+                            sync: false,
+                        },
+                    },
+                    line_linked: {
+                        enable: true,
+                        distance: 200,
+                        color: "#718b00", // Match particle color
+                        opacity: 1,
+                        width: 2,
+                    },
+                    move: {
+                        enable: true,
+                        speed: 20,
+                        direction: "none",
+                        random: false,
+                        straight: false,
+                        out_mode: "out",
+                        bounce: false,
+                        attract: {
+                            enable: true,
+                            rotateX: 1200,
+                            rotateY: 1200,
+                        },
+                    },
+                },
+                interactivity: {
+                    detect_on: "canvas",
+                    events: {
+                        onhover: {
+                            enable: true,
+                            mode: "repulse",
+                        },
+                        onclick: {
+                            enable: true,
+                            mode: "push",
+                        },
+                        resize: true,
+                    },
+                    modes: {
+                        grab: {
+                            distance: 400,
+                            line_linked: {
+                                opacity: 1,
+                            },
+                        },
+                        bubble: {
+                            distance: 400,
+                            size: 40,
+                            duration: 2,
+                            opacity: 8,
+                            speed: 3,
+                        },
+                        repulse: {
+                            distance: 200,
+                            duration: 0.4,
+                        },
+                        push: {
+                            particles_nb: 4,
+                        },
+                        remove: {
+                            particles_nb: 2,
+                        },
+                    },
+                },
+                retina_detect: true,
+            });
+            particlesInitialized = true;
+        }
+
+        function toggleFullscreen() {
+            var particlesContainer = document.getElementById("particles-js");
+            var body = document.body;
+
+            if (!particlesInitialized) {
+                initializeParticles();
+            }
+
+            if (particlesContainer.style.display === "none") {
+                particlesContainer.style.display = "block";
+                body.classList.add("fullscreen-active");
+            } else {
+                particlesContainer.style.display = "none";
+                body.classList.remove("fullscreen-active");
+            }
+
+            // Reinitialize particles after toggling fullscreen
+            initializeParticles();
+        }
+
+        function rateSmexy() {
+            var randomNumber = Math.floor(Math.random() * 10) + 1;
+            var ratingText = 'Your rating out of ten: ' + randomNumber + ' ';
+
+            switch (randomNumber) {
+                case 1:
+                    ratingText += '😖 Disgusting';
+                    break;
+                case 2:
+                    ratingText += '😟 Awful';
+                    break;
+                case 3:
+                    ratingText += '😕 Not Good';
+                    break;
+                case 4:
+                    ratingText += '😐 Meh';
+                    break;
+                case 5:
+                    ratingText += '😊 Okay';
+                    break;
+                case 6:
+                    ratingText += '😄 Good';
+                    break;
+                case 7:
+                    ratingText += '😃 Great';
+                    break;
+                case 8:
+                    ratingText += '😍 Lovely';
+                    break;
+                case 9:
+                    ratingText += '😘 Wonderful';
+                    break;
+                case 10:
+                    ratingText += '😘😘😍😐 Beautiful';
+                    break;
+            }
+
+            document.getElementById('ratingOutput').innerText = ratingText;
+        }
+      function sunblitfunc(){
+      alert('We dont care about your opinion');
+      };
+    </script>
+</body>
+
+</html>
